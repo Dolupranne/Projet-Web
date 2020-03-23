@@ -18,10 +18,10 @@ class UtilisateurController extends AbstractController
     /**
      * @Route("/page/{p}", name="utilisateur_index", methods={"GET"})
      */
-    public function index($p=1,UtilisateurRepository $utilisateurRepository): Response
+    public function index($p=0,UtilisateurRepository $utilisateurRepository): Response
     {
         return $this->render('utilisateur/index.html.twig', [
-            'utilisateurs' => $utilisateurRepository-> findBy([],null, $limit = 1, $offset = $p),
+            'utilisateurs' => $utilisateurRepository-> findBy([],null, $limit = 10, $offset = $p),
         ]);
     }
 
