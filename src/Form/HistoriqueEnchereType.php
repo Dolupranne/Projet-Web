@@ -2,25 +2,25 @@
 
 namespace App\Form;
 
-use App\Entity\Role;
+use App\Entity\HistoriqueEnchere;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RoleType extends AbstractType
+class HistoriqueEnchereType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('niveau')
-            ->add('description')
+            ->add('prix')
+            ->add('date_enchere')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Role::class,
+            'data_class' => HistoriqueEnchere::class,
         ]);
     }
 }

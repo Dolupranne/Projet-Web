@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New HistoriqueEnchere{% endblock %}
+
+{% block body %}
+    <h1>Create new HistoriqueEnchere</h1>
+
+    {{ include('historique_enchere/_form.html.twig') }}
+
+    <a href="{{ path('historique_enchere_index') }}">back to list</a>
+{% endblock %}

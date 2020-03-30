@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Role index{% endblock %}
+{% block title %}PackJeton index{% endblock %}
 
 
 {% block css %} 
@@ -17,35 +17,37 @@ $(document).ready( function () {
 {% endblock %}
 
 {% block body %}
-    <h1>Role index</h1>
+    <h1>PackJeton index</h1>
 
     <table id="table" class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Niveau</th>
+                <th>Nbjetons</th>
                 <th>Description</th>
+                <th>Prix</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for role in roles %}
+        {% for pack_jeton in pack_jetons %}
             <tr>
-                <td>{{ role.id }}</td>
-                <td>{{ role.niveau }}</td>
-                <td>{{ role.description }}</td>
+                <td>{{ pack_jeton.id }}</td>
+                <td>{{ pack_jeton.nbjetons }}</td>
+                <td>{{ pack_jeton.description }}</td>
+                <td>{{ pack_jeton.prix }}</td>
                 <td>
-                    <a href="{{ path('role_show', {'id': role.id}) }}">show</a>
-                    <a href="{{ path('role_edit', {'id': role.id}) }}">edit</a>
+                    <a href="{{ path('pack_jeton_show', {'id': pack_jeton.id}) }}">show</a>
+                    <a href="{{ path('pack_jeton_edit', {'id': pack_jeton.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="5">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('role_new') }}">Create new</a>
+    <a href="{{ path('pack_jeton_new') }}">Create new</a>
 {% endblock %}

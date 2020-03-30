@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\RoleRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\PackJetonRepository")
  */
-class Role
+class PackJeton
 {
     /**
      * @ORM\Id()
@@ -19,26 +19,31 @@ class Role
     /**
      * @ORM\Column(type="integer")
      */
-    private $niveau;
+    private $nbjetons;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $description;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $prix;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNiveau(): ?int
+    public function getNbjetons(): ?int
     {
-        return $this->niveau;
+        return $this->nbjetons;
     }
 
-    public function setNiveau(int $niveau): self
+    public function setNbjetons(int $nbjetons): self
     {
-        $this->niveau = $niveau;
+        $this->nbjetons = $nbjetons;
 
         return $this;
     }
@@ -51,6 +56,18 @@ class Role
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getPrix(): ?float
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(float $prix): self
+    {
+        $this->prix = $prix;
 
         return $this;
     }

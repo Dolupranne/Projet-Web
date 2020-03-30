@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit HistoriqueEnchere{% endblock %}
+
+{% block body %}
+    <h1>Edit HistoriqueEnchere</h1>
+
+    {{ include('historique_enchere/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('historique_enchere_index') }}">back to list</a>
+
+    {{ include('historique_enchere/_delete_form.html.twig') }}
+{% endblock %}

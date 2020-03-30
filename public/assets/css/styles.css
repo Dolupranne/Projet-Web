@@ -1,0 +1,13 @@
+/*base*/
+body{background: #ebeff2;}
+.bck1{background: #fff;}
+
+/*generique*/
+.padded{padding: 15px;}
+
+/*header*/
+header#header {margin-bottom: 20px;padding: 10px; background-color:rgb(131, 131, 131)}
+header#header h1 {text-align: center;color:rgb(54, 53, 53);}
+
+/*footer*/
+footer#footer{margin-top: 20px;padding: 10px;}

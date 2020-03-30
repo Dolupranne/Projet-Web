@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Role index{% endblock %}
+{% block title %}HistoriqueEnchere index{% endblock %}
 
 
 {% block css %} 
@@ -17,26 +17,26 @@ $(document).ready( function () {
 {% endblock %}
 
 {% block body %}
-    <h1>Role index</h1>
+    <h1>HistoriqueEnchere index</h1>
 
     <table id="table" class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Niveau</th>
-                <th>Description</th>
+                <th>Prix</th>
+                <th>Date_enchere</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for role in roles %}
+        {% for historique_enchere in historique_encheres %}
             <tr>
-                <td>{{ role.id }}</td>
-                <td>{{ role.niveau }}</td>
-                <td>{{ role.description }}</td>
+                <td>{{ historique_enchere.id }}</td>
+                <td>{{ historique_enchere.prix }}</td>
+                <td>{{ historique_enchere.dateEnchere ? historique_enchere.dateEnchere|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('role_show', {'id': role.id}) }}">show</a>
-                    <a href="{{ path('role_edit', {'id': role.id}) }}">edit</a>
+                    <a href="{{ path('historique_enchere_show', {'id': historique_enchere.id}) }}">show</a>
+                    <a href="{{ path('historique_enchere_edit', {'id': historique_enchere.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -47,5 +47,5 @@ $(document).ready( function () {
         </tbody>
     </table>
 
-    <a href="{{ path('role_new') }}">Create new</a>
+    <a href="{{ path('historique_enchere_new') }}">Create new</a>
 {% endblock %}

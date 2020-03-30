@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}HistoriqueEnchere{% endblock %}
+
+{% block body %}
+    <h1>HistoriqueEnchere</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ historique_enchere.id }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ historique_enchere.prix }}</td>
+            </tr>
+            <tr>
+                <th>Date_enchere</th>
+                <td>{{ historique_enchere.dateEnchere ? historique_enchere.dateEnchere|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('historique_enchere_index') }}">back to list</a>
+
+    <a href="{{ path('historique_enchere_edit', {'id': historique_enchere.id}) }}">edit</a>
+
+    {{ include('historique_enchere/_delete_form.html.twig') }}
+{% endblock %}

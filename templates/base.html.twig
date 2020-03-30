@@ -1,63 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app.request.locale }}">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>
+            {% block title %}
+                {% if title is defined %}{{title}}{% else %}Title{% endif %} | Nom du site
+            {% endblock %}
+        </title>
+        {% block stylesheets %}
+            {# bootstrap #}
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            {# custom #}
+            <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+    <body id="{% block body_id %}{% endblock %}">
 
-<head>
+        {% block header %}
+            <header id="header" class="bck1 border-bottom">
+                <div class="container">
+                    <h1>{% if title is defined %}{{title}}{% else %}Header{% endif %}</h1>
+                </div>
+            </header>      
+        {% endblock %}
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
 
-  <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block nav %}
+            <nav id="main-nav" class="container navbar navbar-expand-lg navbar-light bg-light border rounded mb-3">
+                <ul class="navbar-nav">
+                    <li class="nav-item {% if mainNavHome is defined %}active{% endif %}">
+                        <a class="nav-link" href="{{path('app_homepage_index')}}">Accueil</a>
+                    </li>
+                    {% if is_granted('ROLE_USER') %}
+                        <li class="nav-item {% if mainNavMember is defined %}active{% endif %}">
+                            <a class="nav-link" href="{{path('app_member_index')}}">Espace membre</a>
+                        </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item {% if mainNavAdmin is defined %}active{% endif %}">
+                            <a class="nav-link" href="{{path('app_admin_homepage_index')}}">Espace admin</a>
+                        </li>
+                    {% endif %}
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    {% if is_granted('ROLE_USER') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{path('logout')}}">Déconnexion</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item {% if mainNavLogin is defined %}active{% endif %}">
+                            <a class="nav-link" href="{{path('login')}}">Connexion</a>
+                        </li>
+                        <li class="nav-item {% if mainNavRegistration is defined %}active{% endif %}">
+                            <a class="nav-link" href="{{path('app_registration_register')}}">Inscription</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endblock %}
 
-  <!-- Bootstrap core CSS -->
-  <link href="https://blackrockdigital.github.io/startbootstrap-bare/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
- {% block css %}{% endblock %}
-</head>
+        {% block flash %}
+            {% for flash_message in app.session.flashbag.get('success') %}
+                <div class="container alert alert-success" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashbag.get('info') %}
+                <div class="container alert alert-info" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashbag.get('warning') %}
+                <div class="container alert alert-warning" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashbag.get('danger') %}
+                <div class="container alert alert-danger" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+        {% endblock %}
 
-<body>
+        <div class="container bck1 padded">
+            {% block body %}
+            {% endblock %}
+        </div>
 
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">Start Bootstrap</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+        {% block footer %}
+            <footer id="footer" class="bck1 border-top">
+                <div class="container">
+                    <h4>Footer</h4>
+                </div>
+            </footer>
+        {% endblock %}
 
-  <!-- Page Content -->
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12 text-center">
-        {% block body %}{% endblock %}
-      </div>
-    </div>
-  </div>
-
-  <!-- Bootstrap core JavaScript -->
-  <script src="https://blackrockdigital.github.io/startbootstrap-bare/vendor/jquery/jquery.slim.min.js"></script>
-  <script src="https://blackrockdigital.github.io/startbootstrap-bare/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
- {% block js %}{% endblock %}
-</body>
-
+        {% block javascripts %}{% endblock %}
+    </body>
 </html>

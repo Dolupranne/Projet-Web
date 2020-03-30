@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Role index{% endblock %}
+{% block title %}Achat index{% endblock %}
 
 
 {% block css %} 
@@ -17,35 +17,33 @@ $(document).ready( function () {
 {% endblock %}
 
 {% block body %}
-    <h1>Role index</h1>
+    <h1>Achat index</h1>
 
     <table id="table" class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Niveau</th>
-                <th>Description</th>
+                <th>Date_achat</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for role in roles %}
+        {% for achat in achats %}
             <tr>
-                <td>{{ role.id }}</td>
-                <td>{{ role.niveau }}</td>
-                <td>{{ role.description }}</td>
+                <td>{{ achat.id }}</td>
+                <td>{{ achat.dateAchat ? achat.dateAchat|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('role_show', {'id': role.id}) }}">show</a>
-                    <a href="{{ path('role_edit', {'id': role.id}) }}">edit</a>
+                    <a href="{{ path('achat_show', {'id': achat.id}) }}">show</a>
+                    <a href="{{ path('achat_edit', {'id': achat.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="3">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('role_new') }}">Create new</a>
+    <a href="{{ path('achat_new') }}">Create new</a>
 {% endblock %}

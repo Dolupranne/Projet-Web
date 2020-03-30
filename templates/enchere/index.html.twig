@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Role index{% endblock %}
+{% block title %}Enchere index{% endblock %}
 
 
 {% block css %} 
@@ -17,35 +17,37 @@ $(document).ready( function () {
 {% endblock %}
 
 {% block body %}
-    <h1>Role index</h1>
+    <h1>Enchere index</h1>
 
     <table id="table" class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Niveau</th>
-                <th>Description</th>
+                <th>Numero</th>
+                <th>Date_debut</th>
+                <th>Date_fin</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for role in roles %}
+        {% for enchere in encheres %}
             <tr>
-                <td>{{ role.id }}</td>
-                <td>{{ role.niveau }}</td>
-                <td>{{ role.description }}</td>
+                <td>{{ enchere.id }}</td>
+                <td>{{ enchere.numero }}</td>
+                <td>{{ enchere.dateDebut ? enchere.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ enchere.dateFin ? enchere.dateFin|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('role_show', {'id': role.id}) }}">show</a>
-                    <a href="{{ path('role_edit', {'id': role.id}) }}">edit</a>
+                    <a href="{{ path('enchere_show', {'id': enchere.id}) }}">show</a>
+                    <a href="{{ path('enchere_edit', {'id': enchere.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="5">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('role_new') }}">Create new</a>
+    <a href="{{ path('enchere_new') }}">Create new</a>
 {% endblock %}

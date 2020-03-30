@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Role index{% endblock %}
+{% block title %}User index{% endblock %}
 
 
 {% block css %} 
@@ -17,35 +17,37 @@ $(document).ready( function () {
 {% endblock %}
 
 {% block body %}
-    <h1>Role index</h1>
+    <h1>User index</h1>
 
     <table id="table" class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Niveau</th>
-                <th>Description</th>
+                <th>Email</th>
+                <th>Pseudo</th>
+                <th>Password</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for role in roles %}
+        {% for user in users %}
             <tr>
-                <td>{{ role.id }}</td>
-                <td>{{ role.niveau }}</td>
-                <td>{{ role.description }}</td>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.pseudo }}</td>
+                <td>{{ user.password }}</td>
                 <td>
-                    <a href="{{ path('role_show', {'id': role.id}) }}">show</a>
-                    <a href="{{ path('role_edit', {'id': role.id}) }}">edit</a>
+                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="5">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('role_new') }}">Create new</a>
+    <a href="{{ path('user_new') }}">Create new</a>
 {% endblock %}
