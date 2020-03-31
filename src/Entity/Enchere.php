@@ -16,10 +16,6 @@ class Enchere
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $numero;
 
     /**
      * @ORM\Column(type="datetime")
@@ -36,10 +32,6 @@ class Enchere
         return $this->id;
     }
 
-    public function getNumero(): ?int
-    {
-        return $this->numero;
-    }
 
     public function setNumero(int $numero): self
     {
