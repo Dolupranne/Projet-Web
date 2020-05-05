@@ -12,9 +12,9 @@ class EnchereType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('numero')
             ->add('date_debut')
             ->add('date_fin')
+            ->add('produit')
         ;
     }
 

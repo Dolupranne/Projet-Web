@@ -37,7 +37,7 @@ $(document).ready( function () {
                 <td>{{ produit.reference }}</td>
                 <td>{{ produit.descriptif }}</td>
                 <td>{{ produit.prix }}</td>
-                <td>{{ produit.image }}</td>
+                <td> <img width="100" height="100" src="{{produit.image}}" /> </td>
                 <td>
                     <a href="{{ path('produit_show', {'id': produit.id}) }}">show</a>
                     <a href="{{ path('produit_edit', {'id': produit.id}) }}">edit</a>

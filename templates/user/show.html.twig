@@ -16,12 +16,16 @@
                 <td>{{ user.email }}</td>
             </tr>
             <tr>
-                <th>Pseudo</th>
-                <td>{{ user.pseudo }}</td>
+                <th>Roles</th>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
             </tr>
             <tr>
                 <th>Password</th>
                 <td>{{ user.password }}</td>
+            </tr>
+            <tr>
+                <th>Pseudo</th>
+                <td>{{ user.pseudo }}</td>
             </tr>
         </tbody>
     </table>

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -32,9 +34,19 @@ class Produit
     private $prix;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=2048)
      */
     private $image;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Enchere", mappedBy="produit", orphanRemoval=true)
+     */
+    private $encheres;
+
+    public function __construct()
+    {
+        $this->encheres = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -87,5 +99,41 @@ class Produit
         $this->image = $image;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Enchere[]
+     */
+    public function getEncheres(): Collection
+    {
+        return $this->encheres;
+    }
+
+    public function addEnchere(Enchere $enchere): self
+    {
+        if (!$this->encheres->contains($enchere)) {
+            $this->encheres[] = $enchere;
+            $enchere->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEnchere(Enchere $enchere): self
+    {
+        if ($this->encheres->contains($enchere)) {
+            $this->encheres->removeElement($enchere);
+            // set the owning side to null (unless already changed)
+            if ($enchere->getProduit() === $this) {
+                $enchere->setProduit(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->reference;
     }
 }

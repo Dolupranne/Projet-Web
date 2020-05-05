@@ -2,150 +2,227 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ORM\Table(name="user")
- * @UniqueEntity(fields="email")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User implements UserInterface, \Serializable {
-
+class User implements UserInterface
+{
     /**
-     * @ORM\Id
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
-     * @Assert\NotBlank()
-     * @Assert\Email()
+     * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
 
     /**
-     * @Assert\NotBlank()
-     * @Assert\Length(max=250)
+     * @ORM\Column(type="json")
      */
-    private $plainPassword;
+    private $roles = [];
 
     /**
-     * The below length depends on the "algorithm" you use for encoding
-     * the password, but this works well with bcrypt.
-     *
-     * @ORM\Column(type="string", length=64)
+     * @var string The hashed password
+     * @ORM\Column(type="string")
      */
     private $password;
 
     /**
-     * @ORM\Column(name="is_active", type="boolean")
+     * @ORM\Column(type="string", length=255)
      */
-    private $isActive;
+    private $pseudo;
 
     /**
-     * @ORM\Column(name="roles", type="array")
+     * @ORM\OneToMany(targetEntity="App\Entity\Achat", mappedBy="user", orphanRemoval=true)
      */
-    private $roles = array();
+    private $achat;
 
-    public function __construct() {
-        $this->isActive = true;
-        // may not be needed, see section on salt below
-        // $this->salt = md5(uniqid('', true));
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Role", inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $role;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\HistoriqueEnchere", mappedBy="user", orphanRemoval=true)
+     */
+    private $historiqueEnchere;
+
+    public function __construct()
+    {
+        $this->achat = new ArrayCollection();
+        $this->historiqueEnchere = new ArrayCollection();
     }
 
-    public function getUsername() {
-        return $this->email;
-    }
-
-    public function getSalt() {
-        // you *may* need a real salt depending on your encoder
-        // see section on salt below
-        return null;
-    }
-
-    /** @see \Serializable::serialize() */
-    public function serialize() {
-        return serialize(array(
-            $this->id,
-            $this->email,
-            $this->password,
-            $this->isActive,
-                // see section on salt below
-                // $this->salt,
-        ));
-    }
-
-    /** @see \Serializable::unserialize() */
-    public function unserialize($serialized) {
-        list (
-                $this->id,
-                $this->email,
-                $this->password,
-                $this->isActive,
-                // see section on salt below
-                // $this->salt
-                ) = unserialize($serialized);
-    }
-
-    public function eraseCredentials() {
-       
-    }
-
-    public function getPassword() {
-        return $this->password;
-    }
-
-    function setPassword($password) {
-        $this->password = $password;
-    }
-
-    public function getRoles() {
-        if (empty($this->roles)) {
-            return ['ROLE_USER'];
-        }
-        return $this->roles;
-    }
-
-    function addRole($role) {
-        $this->roles[] = $role;
-    }
-
-
-    function getId() {
+    public function getId(): ?int
+    {
         return $this->id;
     }
 
-    function getEmail() {
+    public function getEmail(): ?string
+    {
         return $this->email;
     }
 
-    function getPlainPassword() {
-        return $this->plainPassword;
-    }
-
-    function getIsActive() {
-        return $this->isActive;
-    }
-
-    function setId($id) {
-        $this->id = $id;
-    }
-
-    function setEmail($email) {
+    public function setEmail(string $email): self
+    {
         $this->email = $email;
+
+        return $this;
     }
 
-    function setPlainPassword($plainPassword) {
-        $this->plainPassword = $plainPassword;
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
+    {
+        return (string) $this->email;
     }
 
-    function setIsActive($isActive) {
-        $this->isActive = $isActive;
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
     }
 
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): string
+    {
+        return (string) $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getSalt()
+    {
+        // not needed when using the "bcrypt" algorithm in security.yaml
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(string $pseudo): self
+    {
+        $this->pseudo = $pseudo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Achat[]
+     */
+    public function getAchat(): Collection
+    {
+        return $this->achat;
+    }
+
+    public function addAchat(Achat $achat): self
+    {
+        if (!$this->achat->contains($achat)) {
+            $this->achat[] = $achat;
+            $achat->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAchat(Achat $achat): self
+    {
+        if ($this->achat->contains($achat)) {
+            $this->achat->removeElement($achat);
+            // set the owning side to null (unless already changed)
+            if ($achat->getUser() === $this) {
+                $achat->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getRole(): ?Role
+    {
+        return $this->role;
+    }
+
+    public function setRole(?Role $role): self
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|HistoriqueEnchere[]
+     */
+    public function getHistoriqueEnchere(): Collection
+    {
+        return $this->historiqueEnchere;
+    }
+
+    public function addHistoriqueEnchere(HistoriqueEnchere $historiqueEnchere): self
+    {
+        if (!$this->historiqueEnchere->contains($historiqueEnchere)) {
+            $this->historiqueEnchere[] = $historiqueEnchere;
+            $historiqueEnchere->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHistoriqueEnchere(HistoriqueEnchere $historiqueEnchere): self
+    {
+        if ($this->historiqueEnchere->contains($historiqueEnchere)) {
+            $this->historiqueEnchere->removeElement($historiqueEnchere);
+            // set the owning side to null (unless already changed)
+            if ($historiqueEnchere->getUser() === $this) {
+                $historiqueEnchere->setUser(null);
+            }
+        }
+
+        return $this;
+    }
 }

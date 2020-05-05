@@ -26,6 +26,20 @@ class HistoriqueEnchere
      */
     private $date_enchere;
 
+   
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Enchere", inversedBy="historiqueEnchere")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $enchere;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="historiqueEnchere")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -51,6 +65,32 @@ class HistoriqueEnchere
     public function setDateEnchere(\DateTimeInterface $date_enchere): self
     {
         $this->date_enchere = $date_enchere;
+
+        return $this;
+    }
+
+    
+
+    public function getEnchere(): ?Enchere
+    {
+        return $this->enchere;
+    }
+
+    public function setEnchere(?Enchere $enchere): self
+    {
+        $this->enchere = $enchere;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

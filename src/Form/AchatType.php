@@ -13,6 +13,8 @@ class AchatType extends AbstractType
     {
         $builder
             ->add('date_achat')
+            ->add('packJetons')
+            ->add('user')
         ;
     }
 
