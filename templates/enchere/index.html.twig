@@ -23,8 +23,10 @@ $(document).ready( function () {
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Date_debut</th>
-                <th>Date_fin</th>
+                <th>Date de début</th>
+                <th>Date de fin</th>
+                <th>Reference</th>
+                <th>Image</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -32,13 +34,15 @@ $(document).ready( function () {
         {% for enchere in encheres %}
             <tr>
                 <td>{{ enchere.id }}</td>
-                <td>{{ enchere.dateDebut ? enchere.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ enchere.dateFin ? enchere.dateFin|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ enchere.dateDebut ? enchere.dateDebut|date('d-m-Y H:i:s') : '' }}</td>
+                <td>{{ enchere.dateFin ? enchere.dateFin|date('d-m-Y H:i:s') : '' }}</td>
+                <td>{{ enchere.produit.reference ? enchere.produit.reference}}</td>
+                <td> <img width="100" height="100" src="{{enchere.produit.image}}" /></td>
                 <td>
                     <a href="{{ path('enchere_show', {'id': enchere.id}) }}">show</a>
                     <a href="{{ path('enchere_edit', {'id': enchere.id}) }}">edit</a>
                 </td>
-            </tr>
+            </tr>   
         {% else %}
             <tr>
                 <td colspan="4">no records found</td>

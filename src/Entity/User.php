@@ -185,6 +185,9 @@ class User implements UserInterface
 
     public function getRole(): ?Role
     {
+        if (empty($this->roles)) {
+            return [0];
+        }
         return $this->role;
     }
 
@@ -225,4 +228,5 @@ class User implements UserInterface
 
         return $this;
     }
+
 }
