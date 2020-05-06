@@ -4,36 +4,36 @@
 
 {% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper { margin-right; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-    ul {padding: 0; width: 100%; }
     li {  display: inline;}
     .boutonLink {  outline: none;  text-decoration: none;  display: inline-block;  width: 30%;  margin-right: 0.625%;  text-align: center;  line-height: 3;  color: black; background : lightslategrey}
     li:last-child .boutonLink {  margin-right: 0;}
     .boutonLink:link = black, .boutonLink:visited = black, .boutonLink:focus {  background: white;}
     .couleurBouton:hover {  background: grey; color: white}
     .couleurBouton:active {  background: white;  color: grey;}
-    .tailleBoutton{min-height:100px; min-width:300px; font-size:50px;}
+    .tailleBoutton{min-height:100px; min-width:300px; font-size:100px;}
     .couleurBouton{color:grey;}
 
 </style>
 
 <div class="example-wrapper">
     <phraseAcceuille> <h1>Bienvenue dans ce magnifique site d'enchère INVERSÉ !! </h1></phraseAcceuille>
-
+<br>
     Vous pouvez choisir une option :
     <ul>
-    {% block navAcceuille %}
+    {% block navAcceuille %}<br>    
     
         <nav class="navbar navbar-expand-xl">
-        <ul class="navbar-nav tailleBoutton">
-            <li class="container navbar navbar-expand-xl navbar-light bg-light border rounded mb-3">
-                <boutonLienAcceuil><a class="nav-link couleurBouton" href="{{ path('enchere_index') }}">Enchères</a></boutonLienAcceuil>
-            </li>
-            <li class="container navbar navbar-expand-lg navbar-light bg-light border rounded mb-3">
-                <boutonLienAcceuil><a class="nav-link couleurBouton" href="{{ path('produit_index') }}">Produits</a></boutonLienAcceuil>
-            </li>
-        </ul>
+            <ul class="navbar-nav tailleBoutton">
+                <li class="container navbar navbar-expand-xl navbar-light bg-light border rounded mb-3">
+                    <boutonLienAcceuil><a class="nav-link couleurBouton" href="{{ path('enchere_index') }}">Enchères</a></boutonLienAcceuil>
+                </li>
+                <li class="container navbar navbar-expand-xl navbar-light bg-light border rounded mb-3">
+                    <boutonLienAcceuil><a class="nav-link couleurBouton" href="{{ path('produit_index') }}">Produits</a></boutonLienAcceuil>
+                </li>
+            </ul>
+        </nav>
         
         {% endblock %}
         {% endblock %}
