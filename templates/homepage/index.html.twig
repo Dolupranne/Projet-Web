@@ -12,20 +12,20 @@
     .boutonLink:link = black, .boutonLink:visited = black, .boutonLink:focus {  background: white;}
     .couleurBouton:hover {  background: grey; color: white}
     .couleurBouton:active {  background: white;  color: grey;}
-    .tailleBoutton{min-height:100px; min-width:300px; font-size:100px;}
+    .tailleBoutton{min-height:100px; min-width:300px; font-size:80px;}
     .couleurBouton{color:grey;}
 
 </style>
 
 <div class="example-wrapper">
-    <phraseAcceuille> <h1>Bienvenue dans ce magnifique site d'enchère INVERSÉ !! </h1></phraseAcceuille>
+    <phraseAcceuille> <h1>Bienvenue dans ce magnifique site d'enchère<br> INVERSÉ !! </h1></phraseAcceuille>
 <br>
-    Vous pouvez choisir une option :
+    Voici ce que nous vous proposons :
     <ul>
     {% block navAcceuille %}<br>    
     
         <nav class="navbar navbar-expand-xl">
-            <ul class="navbar-nav tailleBoutton">
+            <ul class="navbar-nav tailleBoutton mx-auto">
                 <li class="container navbar navbar-expand-xl navbar-light bg-light border rounded mb-3">
                     <boutonLienAcceuil><a class="nav-link couleurBouton" href="{{ path('enchere_index') }}">Enchères</a></boutonLienAcceuil>
                 </li>
