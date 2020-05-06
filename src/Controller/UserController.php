@@ -36,6 +36,7 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $user->role_id=0;
             $entityManager->persist($user);
             $entityManager->flush();
 

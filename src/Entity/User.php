@@ -183,7 +183,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getRole(): ?Role
+    /*public function getRole(): ?Role
     {
         if (empty($this->roles)) {
             return [0];
@@ -196,7 +196,7 @@ class User implements UserInterface
         $this->role = $role;
 
         return $this;
-    }
+    }*/
 
     /**
      * @return Collection|HistoriqueEnchere[]
