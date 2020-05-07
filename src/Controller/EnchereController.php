@@ -30,7 +30,7 @@ class EnchereController extends AbstractController
     /**
      * @Route("/new", name="enchere_new", methods={"GET","POST"})
      * 
-     *  @IsGranted("ROLE_ADMIN")
+     *  @IsGranted("ROLE_MODO")
      */
     public function new(Request $request): Response
     {
@@ -67,7 +67,7 @@ class EnchereController extends AbstractController
     /**
      * @Route("/{id}/edit", name="enchere_edit", methods={"GET","POST"})
      * 
-     *  @IsGranted("ROLE_ADMIN")
+     *  @IsGranted("ROLE_MODO")
      */
     public function edit(Request $request, Enchere $enchere): Response
     {
@@ -90,7 +90,7 @@ class EnchereController extends AbstractController
     /**
      * @Route("/{id}", name="enchere_delete", methods={"DELETE"})
      * 
-     *  @IsGranted("ROLE_ADMIN")
+     *  @IsGranted("ROLE_MODO")
      */
     public function delete(Request $request, Enchere $enchere): Response
     {

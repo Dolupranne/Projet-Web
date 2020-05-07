@@ -30,7 +30,7 @@ class ProduitController extends AbstractController
     /**
      * @Route("/new", name="produit_new", methods={"GET","POST"})
      * 
-     *  @IsGranted("ROLE_ADMIN")
+     *  @IsGranted("ROLE_MODO")
      */
     public function new(Request $request): Response
     {
@@ -67,7 +67,7 @@ class ProduitController extends AbstractController
     /**
      * @Route("/{id}/edit", name="produit_edit", methods={"GET","POST"})
      * 
-     *  @IsGranted("ROLE_ADMIN")
+     *  @IsGranted("ROLE_MODO")
      */
     public function edit(Request $request, Produit $produit): Response
     {
@@ -90,7 +90,7 @@ class ProduitController extends AbstractController
     /**
      * @Route("/{id}", name="produit_delete", methods={"DELETE"})
      * 
-     *  @IsGranted("ROLE_ADMIN")
+     *  @IsGranted("ROLE_MODO")
      */
     public function delete(Request $request, Produit $produit): Response
     {
