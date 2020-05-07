@@ -43,11 +43,13 @@
                         Action
                     </button>
                     <div class="dropdown-menu">
+                        <div class="dropdown-header">Pour nos membres</div>
                         <a class="dropdown-item" href="{{ path('enchere_index') }}">Enchère</a>
                         <a class="dropdown-item" href="{{ path('produit_index') }}">Produits</a>
                         <a class="dropdown-item" href="{{ path('historique_enchere_index') }}">Historique Enchère</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Autres témoignages</a>
+                        <div class="dropdown-header">Catégorie ADMIN</div>
+                        <a class="dropdown-item" href="{{ path('admin_utilisateurs') }}">Modifier les utilisateurs</a>
                     </div>
                 </div>
             </div>
