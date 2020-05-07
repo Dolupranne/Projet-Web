@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/produit")
@@ -22,11 +23,14 @@ class ProduitController extends AbstractController
     {
         return $this->render('produit/index.html.twig', [
             'produits' => $produitRepository->findAll(),
+            'title'=>'Liste des produits'
         ]);
     }
 
     /**
      * @Route("/new", name="produit_new", methods={"GET","POST"})
+     * 
+     *  @IsGranted("ROLE_ADMIN")
      */
     public function new(Request $request): Response
     {
@@ -45,6 +49,7 @@ class ProduitController extends AbstractController
         return $this->render('produit/new.html.twig', [
             'produit' => $produit,
             'form' => $form->createView(),
+            'title'=>'Ajouter un produit'
         ]);
     }
 
@@ -55,11 +60,14 @@ class ProduitController extends AbstractController
     {
         return $this->render('produit/show.html.twig', [
             'produit' => $produit,
+            'title'=>'Produit'
         ]);
     }
 
     /**
      * @Route("/{id}/edit", name="produit_edit", methods={"GET","POST"})
+     * 
+     *  @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, Produit $produit): Response
     {
@@ -75,11 +83,14 @@ class ProduitController extends AbstractController
         return $this->render('produit/edit.html.twig', [
             'produit' => $produit,
             'form' => $form->createView(),
+            'title'=>'Modifier un produit'
         ]);
     }
 
     /**
      * @Route("/{id}", name="produit_delete", methods={"DELETE"})
+     * 
+     *  @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, Produit $produit): Response
     {

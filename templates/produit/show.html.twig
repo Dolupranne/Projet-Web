@@ -8,12 +8,12 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ produit.id }}</td>
-            </tr>
-            <tr>
                 <th>Reference</th>
                 <td>{{ produit.reference }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td><img width="300" height="300" src="{{produit.image}}" /></td>
             </tr>
             <tr>
                 <th>Descriptif</th>
@@ -23,16 +23,9 @@
                 <th>Prix</th>
                 <td>{{ produit.prix }}</td>
             </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ produit.image }}</td>
-            </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('produit_index') }}">back to list</a>
+    <a class='btn btn-primary' href="{{ path('app_index') }}">Aller encherir !!</a>
 
-    <a href="{{ path('produit_edit', {'id': produit.id}) }}">edit</a>
-
-    {{ include('produit/_delete_form.html.twig') }}
 {% endblock %}

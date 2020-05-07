@@ -3,6 +3,12 @@
 {% block title %}Liste des utilisateurs{% endblock %}
 
 {% block body %}
+
+<style>
+    td,th {padding: .5em 5em;}
+</style>
+
+
     <h1>Liste des utilisateurs</h1>
     <table>
         <thead>
@@ -23,7 +29,7 @@
                             {% if role == "ROLE_USER" %}
                                 Utilisateur
                             {% elseif role == "ROLE_ADMIN" %}
-                                Administrateur
+                                Administrateur |
                             {% endif %}
                         {% endfor %}
                     </td>
