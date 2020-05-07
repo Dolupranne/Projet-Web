@@ -8,23 +8,22 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ enchere.id }}</td>
+                <th>{{ enchere.produit.reference ? enchere.produit.reference}}</th>
+            </tr>
+            <tr> 
+                <th><img width="300" height="300" src="{{enchere.produit.image}}" /></th>
             </tr>
             <tr>
                 <th>Date_debut</th>
-                <td>{{ enchere.dateDebut ? enchere.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ enchere.dateDebut ? enchere.dateDebut|date('d/m/Y à H:i') : '' }}</td>
             </tr>
             <tr>
                 <th>Date_fin</th>
-                <td>{{ enchere.dateFin ? enchere.dateFin|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ enchere.dateFin ? enchere.dateFin|date('d/m/Y à H:i') : '' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('enchere_index') }}">back to list</a>
+    <a class='btn btn-primary' href="{{ path('enchere_index') }}">Retourner a la liste des enchère</a>
 
-    <a href="{{ path('enchere_edit', {'id': enchere.id}) }}">edit</a>
-
-    {{ include('enchere/_delete_form.html.twig') }}
 {% endblock %}

@@ -1,13 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Enchere{% endblock %}
+{% block title %}Modifier une enchère{% endblock %}
 
 {% block body %}
-    <h1>Edit Enchere</h1>
+    <h1>Modifier une enchère</h1>
 
     {{ include('enchere/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('enchere_index') }}">back to list</a>
+    <a class='btn btn-info' href="{{ path('enchere_index') }}">Revenir a la liste des enchères</a>
 
     {{ include('enchere/_delete_form.html.twig') }}
+    
 {% endblock %}

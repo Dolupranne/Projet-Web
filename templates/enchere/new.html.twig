@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Enchere{% endblock %}
+{% block title %}Ajouter une nouvelle enchère{% endblock %}
 
 {% block body %}
-    <h1>Create new Enchere</h1>
+    <h1>Ajouter une nouvelle enchère</h1>
 
     {{ include('enchere/_form.html.twig') }}
 
-    <a href="{{ path('enchere_index') }}">back to list</a>
+    <a class='btn btn-info' href="{{ path('enchere_index') }}">Retourner a la liste des enchères</a>
 {% endblock %}

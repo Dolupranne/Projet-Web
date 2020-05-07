@@ -17,12 +17,22 @@ $(document).ready( function () {
 {% endblock %}
 
 {% block body %}
+
+<style>
+    .SEP{  display: block;
+            width: 90px;
+            height: 40px;
+            font-size:15px;
+            }
+    #texteButton{color: #FFFFFF; text-align: center;}
+</style>
+
     <h1>Enchere index</h1>
 
     <table id="table" class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Numéro</th>
                 <th>Date de début</th>
                 <th>Date de fin</th>
                 <th>Reference</th>
@@ -34,13 +44,14 @@ $(document).ready( function () {
         {% for enchere in encheres %}
             <tr>
                 <td>{{ enchere.id }}</td>
-                <td>{{ enchere.dateDebut ? enchere.dateDebut|date('d-m-Y H:i:s') : '' }}</td>
-                <td>{{ enchere.dateFin ? enchere.dateFin|date('d-m-Y H:i:s') : '' }}</td>
+                <td>{{ enchere.dateDebut ? enchere.dateDebut|date('d/m/Y à H:i') : '' }}</td>
+                <td>{{ enchere.dateFin ? enchere.dateFin|date('d/m/Y à H:i') : '' }}</td>
                 <td>{{ enchere.produit.reference ? enchere.produit.reference}}</td>
                 <td> <img width="100" height="100" src="{{enchere.produit.image}}" /></td>
                 <td>
-                    <a href="{{ path('enchere_show', {'id': enchere.id}) }}">show</a>
-                    <a href="{{ path('enchere_edit', {'id': enchere.id}) }}">edit</a>
+                    <a class="btn btn-primary SEP" class="nav-link" href="{{ path('enchere_show', {'id': enchere.id}) }}"><div id = "texteButton">voir</div></a>
+                    <a class="btn btn-warning SEP" class="nav-link" href="{{ path('enchere_edit', {'id': enchere.id}) }}"><div id = "texteButton">modifier</div></a>
+                    {{ include('enchere/_delete_form.html.twig') }}
                 </td>
             </tr>   
         {% else %}
@@ -51,5 +62,5 @@ $(document).ready( function () {
         </tbody>
     </table>
 
-    <a href="{{ path('enchere_new') }}">Create new</a>
+    <a class='btn btn-primary' href="{{ path('enchere_new') }}">Ajouter une nouvelle enchère</a>
 {% endblock %}
