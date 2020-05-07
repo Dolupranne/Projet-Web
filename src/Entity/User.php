@@ -6,6 +6,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -21,6 +23,8 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Email()
      */
     private $email;
 
@@ -40,16 +44,11 @@ class User implements UserInterface
      */
     private $pseudo;
 
+
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Achat", mappedBy="user", orphanRemoval=true)
      */
     private $achat;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Role", inversedBy="users")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $role;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\HistoriqueEnchere", mappedBy="user", orphanRemoval=true)
@@ -183,21 +182,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getRole(): ?Role
-    {
-        if (empty($this->roles)) {
-            return [0];
-        }
-        return $this->role;
-    }
-
-    public function setRole(?Role $role): self
-    {
-        $this->role = $role;
-
-        return $this;
-    }
-
     /**
      * @return Collection|HistoriqueEnchere[]
      */
@@ -228,5 +212,4 @@ class User implements UserInterface
 
         return $this;
     }
-
 }

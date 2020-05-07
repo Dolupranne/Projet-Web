@@ -40,6 +40,8 @@ class HistoriqueEnchere
      */
     private $user;
 
+   
+
     public function getId(): ?int
     {
         return $this->id;
@@ -94,4 +96,6 @@ class HistoriqueEnchere
 
         return $this;
     }
+
+    
 }
