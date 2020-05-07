@@ -47,7 +47,7 @@ $(document).ready( function () {
                 <td>{{ enchere.dateDebut ? enchere.dateDebut|date('d/m/Y à H:i') : '' }}</td>
                 <td>{{ enchere.dateFin ? enchere.dateFin|date('d/m/Y à H:i') : '' }}</td>
                 <td>{{ enchere.produit.reference ? enchere.produit.reference}}</td>
-                <td> <img width="100" height="100" src="{{enchere.produit.image}}" /></td>
+                <td> <img width="200" height="200" src="{{enchere.produit.image}}" /></td>
                 <td>
                     <a class="btn btn-primary SEP" class="nav-link" href="{{ path('enchere_show', {'id': enchere.id}) }}"><div id = "texteButton">voir</div></a>
                     <a class="btn btn-warning SEP" class="nav-link" href="{{ path('enchere_edit', {'id': enchere.id}) }}"><div id = "texteButton">modifier</div></a>
@@ -56,7 +56,7 @@ $(document).ready( function () {
             </tr>   
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">Aucun enregistrement trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
