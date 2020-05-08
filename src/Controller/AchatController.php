@@ -38,6 +38,8 @@ class AchatController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $achat->setDateAchat(new \Datetime());
             $achat->setUser($this->getUser());
+            
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($achat);
             $entityManager->flush();
