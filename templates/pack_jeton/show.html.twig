@@ -25,14 +25,15 @@
             </tr>
         </tbody>
     </table>
+    
 
-    <a class='btn btn-primary' href="{{ path('pack_jeton_index') }}">Acheter !</a></br>
+    <a class='btn btn-primary' href="{{ path('achat_new') }}">Acheter !</a></br>
 
     <a class='btn btn-info' href="{{ path('pack_jeton_index') }}">Retourner a la liste des pack jetons</a></br>
 
     {% if is_granted('ROLE_MODO') %}
 
-    <a class='btn btn-warning' href="{{ path('pack_jeton_edit', {'id': pack_jeton.id}) }}">edit</a>
+    <a class='btn btn-warning' href="{{ path('pack_jeton_edit', {'id': pack_jeton.id}) }}">Modifier</a>
     {{ include('pack_jeton/_delete_form.html.twig') }}
 
     {% endif %}
