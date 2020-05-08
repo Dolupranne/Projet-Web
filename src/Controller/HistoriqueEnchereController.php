@@ -34,7 +34,7 @@ class HistoriqueEnchereController extends AbstractController
      */
     public function new(Request $request): Response
     {
-
+        
         
         $historiqueEnchere = new HistoriqueEnchere();
 
@@ -59,6 +59,8 @@ class HistoriqueEnchereController extends AbstractController
             'historique_enchere' => $historiqueEnchere,
             'form' => $form->createView(),
         ]);
+        
+        
     }
 
     /**
