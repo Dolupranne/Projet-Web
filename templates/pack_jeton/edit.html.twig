@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit PackJeton{% endblock %}
+{% block title %}Modifier un pack jetons{% endblock %}
 
 {% block body %}
-    <h1>Edit PackJeton</h1>
+    <h1>Modifier un pack jetons</h1>
 
     {{ include('pack_jeton/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('pack_jeton_index') }}">back to list</a>
+    <a class='btn btn-info' href="{{ path('pack_jeton_index') }}">Revenir a la liste des produits</a>
 
     {{ include('pack_jeton/_delete_form.html.twig') }}
 {% endblock %}

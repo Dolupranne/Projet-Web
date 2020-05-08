@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}PackJeton{% endblock %}
+{% block title %}Pack jeton{% endblock %}
 
 {% block body %}
-    <h1>PackJeton</h1>
+    <h1>Pack jeton</h1>
 
     <table class="table">
         <tbody>
@@ -26,9 +26,16 @@
         </tbody>
     </table>
 
-    <a href="{{ path('pack_jeton_index') }}">back to list</a>
+    <a class='btn btn-primary' href="{{ path('pack_jeton_index') }}">Acheter !</a></br>
 
-    <a href="{{ path('pack_jeton_edit', {'id': pack_jeton.id}) }}">edit</a>
+    <a class='btn btn-info' href="{{ path('pack_jeton_index') }}">Retourner a la liste des pack jetons</a></br>
 
+    {% if is_granted('ROLE_MODO') %}
+
+    <a class='btn btn-warning' href="{{ path('pack_jeton_edit', {'id': pack_jeton.id}) }}">edit</a>
     {{ include('pack_jeton/_delete_form.html.twig') }}
+
+    {% endif %}
+    
+
 {% endblock %}
