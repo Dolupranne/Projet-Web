@@ -46,10 +46,10 @@
                         <div class="dropdown-header">Pour tous nos visiteurs pas encore inscrit</div>
                         <a class="dropdown-item" href="{{ path('produit_index') }}">Les produits</a>
                         <a class="dropdown-item" href="{{ path('enchere_index') }}">Les enchère</a>
-                        <a class="dropdown-item" href="{{ path('historique_enchere_index') }}">Historique des enchères</a>
                         {% if is_granted('ROLE_USER') %}
                         <div class="dropdown-divider"></div>
                         <div class="dropdown-header">Catégorie Utilisateurs</div>
+                        <a class="dropdown-item" href="{{ path('historique_enchere_index') }}">Vos tentative d'enchère</a>
                         <a class="dropdown-item" href="{{ path('user_jeton') }}">Vos jetons</a>
                         <a class="dropdown-item" href="{{ path('pack_jeton_index') }}">Acheter vos jetons</a>
                         {% endif %}

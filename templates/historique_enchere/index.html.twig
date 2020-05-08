@@ -18,7 +18,6 @@ $(document).ready( function () {
 
 {% block body %}
     <h1>HistoriqueEnchere index</h1>
-
     <table id="table" class="table">
         <thead>
             <tr>
@@ -26,24 +25,28 @@ $(document).ready( function () {
                 <th>Prix</th>
                 <th>Date_enchere</th>
                 <th>Produit</th>
+                <th>Image</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for historique_enchere in historique_encheres %}
-            <tr>
-                <td>{{ historique_enchere.id }}</td>
-                <td>{{ historique_enchere.prix }}</td>
-                <td>{{ historique_enchere.dateEnchere ? historique_enchere.dateEnchere|date('d-m-Y à H/i') : '' }}</td>
-                <td>{{ historique_enchere.enchere.produit }}</td>
-                <td>
-                    <a class="btn btn-primary SEP" class="nav-link" href="{{ path('historique_enchere_show', {'id': historique_enchere.id}) }}"><div id = "texteButton">voir</div></a></br>
-                    {% if is_granted('ROLE_MODO') %}
-                    <a class="btn btn-warning SEP" class="nav-link" href="{{ path('historique_enchere_edit', {'id': historique_enchere.id}) }}"><div id = "texteButton">modifier</div></a>
-                    {{ include('historique_enchere/_delete_form.html.twig') }}
-                 {% endif %}
-                </td>
-            </tr>
+            {% if is_granted ('ROLE_ADMIN') or  app.user.username == historique_enchere.getUser.username %}
+                <tr>
+                    <td>{{ historique_enchere.id }}</td>
+                    <td>{{ historique_enchere.prix }}</td>
+                    <td>{{ historique_enchere.dateEnchere ? historique_enchere.dateEnchere|date('d-m-Y à H/i') : '' }}</td>
+                    <td>{{ historique_enchere.enchere.produit }}</td>
+                    <td><img width="200" height="200" src="{{historique_enchere.enchere.produit.image}}" /></td>
+                    <td>
+                        <a class="btn btn-primary SEP" class="nav-link" href="{{ path('historique_enchere_show', {'id': historique_enchere.id}) }}"><div id = "texteButton">voir</div></a></br>
+                        {% if is_granted('ROLE_MODO') %}
+                        <a class="btn btn-warning SEP" class="nav-link" href="{{ path('historique_enchere_edit', {'id': historique_enchere.id}) }}"><div id = "texteButton">modifier</div></a>
+                        {{ include('historique_enchere/_delete_form.html.twig') }}
+                    {% endif %}
+                    </td>
+                </tr>
+            {% endif %}
         {% else %}
             <tr>
                 <td colspan="4">no records found</td>
