@@ -14,7 +14,7 @@ class HistoriqueEnchereType extends AbstractType
         $builder
             ->add('prix')
             ->add('enchere')
-            ->add('user')
+            
         ;
     }
 

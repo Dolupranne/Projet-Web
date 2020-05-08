@@ -14,7 +14,6 @@ class AchatType extends AbstractType
         $builder
             
             ->add('packJetons')
-            ->add('user')
         ;
     }
 

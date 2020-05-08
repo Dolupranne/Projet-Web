@@ -34,6 +34,8 @@ class HistoriqueEnchereController extends AbstractController
      */
     public function new(Request $request): Response
     {
+
+        
         $historiqueEnchere = new HistoriqueEnchere();
 
         
@@ -43,6 +45,7 @@ class HistoriqueEnchereController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $historiqueEnchere->setDateEnchere(new \Datetime());
+            $historiqueEnchere->setUser($this->getUser());
             
 
             $entityManager = $this->getDoctrine()->getManager();
