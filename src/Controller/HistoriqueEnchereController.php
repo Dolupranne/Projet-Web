@@ -19,6 +19,8 @@ class HistoriqueEnchereController extends AbstractController
 {
     /**
      * @Route("/", name="historique_enchere_index", methods={"GET"})
+     * 
+     * @IsGranted("ROLE_USER")
      */
     public function index(HistoriqueEnchereRepository $historiqueEnchereRepository): Response
     {
@@ -31,46 +33,47 @@ class HistoriqueEnchereController extends AbstractController
 
     /**
      * @Route("/new", name="historique_enchere_new", methods={"GET","POST"})
+     * 
+     * @IsGranted("ROLE_USER")
      */
-    public function new(Request $request,UserController $userEnti): Response
+    public function new(Request $request): Response
     {
-        if($userEnti->getNbJetons() <= 0)
-        {
-        return $this->render('user/jetonsvoid.html.twig'); 
-        }
-
-        if($userEnti->getNbJetons() > 0)
-        {
         
-            $historiqueEnchere = new HistoriqueEnchere();
+        
+        $historiqueEnchere = new HistoriqueEnchere();
 
+        
+        $form = $this->createForm(HistoriqueEnchereType::class, $historiqueEnchere);
+        $form->handleRequest($request);
+        
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $historiqueEnchere->setDateEnchere(new \Datetime());
+            $historiqueEnchere->setUser($this->getUser());
             
-            $form = $this->createForm(HistoriqueEnchereType::class, $historiqueEnchere);
-            $form->handleRequest($request);
-            
 
-            if ($form->isSubmitted() && $form->isValid()) {
-                $historiqueEnchere->setDateEnchere(new \Datetime());
-                $historiqueEnchere->setUser($this->getUser());
-                
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($historiqueEnchere);
+            $entityManager->flush();
 
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($historiqueEnchere);
-                $entityManager->flush();
-
-                return $this->redirectToRoute('historique_enchere_index');
-            }
-
-            return $this->render('historique_enchere/new.html.twig', [
-                'historique_enchere' => $historiqueEnchere,
-                'form' => $form->createView(),
-            ]);
+            return $this->redirectToRoute('historique_enchere_index');
         }
 
+        return $this->render('historique_enchere/new.html.twig', [
+            'historique_enchere' => $historiqueEnchere,
+            'form' => $form->createView(),
+        ]);
+
+        
+
+        
+        
     }
 
     /**
      * @Route("/{id}", name="historique_enchere_show", methods={"GET"})
+     * 
+     * @IsGranted("ROLE_USER")
      */
     public function show(HistoriqueEnchere $historiqueEnchere): Response
     {
@@ -81,6 +84,8 @@ class HistoriqueEnchereController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="historique_enchere_edit", methods={"GET","POST"})
+     * 
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, HistoriqueEnchere $historiqueEnchere): Response
     {
@@ -101,6 +106,8 @@ class HistoriqueEnchereController extends AbstractController
 
     /**
      * @Route("/{id}", name="historique_enchere_delete", methods={"DELETE"})
+     * 
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, HistoriqueEnchere $historiqueEnchere): Response
     {

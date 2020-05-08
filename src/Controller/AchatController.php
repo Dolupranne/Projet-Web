@@ -13,11 +13,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/achat")
+ * 
+ * @IsGranted("ROLE_USER")
  */
 class AchatController extends AbstractController
 {
     /**
      * @Route("/", name="achat_index", methods={"GET"})
+     * 
+     * @IsGranted("ROLE_USER")
      */
     public function index(AchatRepository $achatRepository): Response
     {
@@ -28,6 +32,8 @@ class AchatController extends AbstractController
 
     /**
      * @Route("/new", name="achat_new", methods={"GET","POST"})
+     * 
+     * @IsGranted("ROLE_USER")
      */
     public function new(Request $request): Response
     {
@@ -55,6 +61,8 @@ class AchatController extends AbstractController
 
     /**
      * @Route("/{id}", name="achat_show", methods={"GET"})
+     * 
+     * @IsGranted("ROLE_USER")
      */
     public function show(Achat $achat): Response
     {
@@ -65,6 +73,8 @@ class AchatController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="achat_edit", methods={"GET","POST"})
+     * 
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, Achat $achat): Response
     {
@@ -85,6 +95,8 @@ class AchatController extends AbstractController
 
     /**
      * @Route("/{id}", name="achat_delete", methods={"DELETE"})
+     * 
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, Achat $achat): Response
     {

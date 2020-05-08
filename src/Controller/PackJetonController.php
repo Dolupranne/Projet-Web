@@ -18,6 +18,8 @@ class PackJetonController extends AbstractController
 {
     /**
      * @Route("/", name="pack_jeton_index", methods={"GET"})
+     * 
+     * @IsGranted("ROLE_USER")
      */
     public function index(PackJetonRepository $packJetonRepository): Response
     {
@@ -28,6 +30,8 @@ class PackJetonController extends AbstractController
 
     /**
      * @Route("/new", name="pack_jeton_new", methods={"GET","POST"})
+     * 
+     * @IsGranted("ROLE_USER")
      */
     public function new(Request $request): Response
     {
@@ -53,6 +57,8 @@ class PackJetonController extends AbstractController
 
     /**
      * @Route("/{id}", name="pack_jeton_show", methods={"GET"})
+     * 
+     * @IsGranted("ROLE_USER")
      */
     public function show(PackJeton $packJeton): Response
     {
@@ -63,6 +69,8 @@ class PackJetonController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="pack_jeton_edit", methods={"GET","POST"})
+     * 
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, PackJeton $packJeton): Response
     {
@@ -83,6 +91,8 @@ class PackJetonController extends AbstractController
 
     /**
      * @Route("/{id}", name="pack_jeton_delete", methods={"DELETE"})
+     * 
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, PackJeton $packJeton): Response
     {
