@@ -126,6 +126,9 @@ class Enchere
 
     public function __toString() 
     {
-        return (string) $this->getProduit(); 
+        $test1 = (string) $this->getProduit();
+        $test2 = (string) $this->getId();
+        $test = $test2.")   ".$test1;
+        return $test;
     }
 }
