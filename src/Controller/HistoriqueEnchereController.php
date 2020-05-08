@@ -27,16 +27,24 @@ class HistoriqueEnchereController extends AbstractController
         ]);
     }
 
+    
+
     /**
      * @Route("/new", name="historique_enchere_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
         $historiqueEnchere = new HistoriqueEnchere();
+
+        
         $form = $this->createForm(HistoriqueEnchereType::class, $historiqueEnchere);
         $form->handleRequest($request);
+        
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $historiqueEnchere->setDateEnchere(new \Datetime());
+            
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($historiqueEnchere);
             $entityManager->flush();
