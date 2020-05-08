@@ -54,7 +54,6 @@ class Achat
         return $this;
     }
 
-    
 
     public function getPackJetons(): ?PackJeton
     {

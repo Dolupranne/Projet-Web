@@ -40,13 +40,18 @@
                     </div>
                     <div class="dropdown my-auto">
                     <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">
-                        Action
+                        Catégorie
                     </button>
                     <div class="dropdown-menu">
                         <div class="dropdown-header">Pour nos membres</div>
                         <a class="dropdown-item" href="{{ path('produit_index') }}">Les produits</a>
                         <a class="dropdown-item" href="{{ path('enchere_index') }}">Les enchère</a>
                         <a class="dropdown-item" href="{{ path('historique_enchere_index') }}">Historique des enchères</a>
+                        {% if is_granted('ROLE_USER') %}
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-header">Catégorie Utilisateurs</div>
+                        <a class="dropdown-item" href="{{ path('user_jeton') }}">Vos jetons</a>
+                        {% endif %}
                         {% if is_granted('ROLE_MODO') %}
                         <div class="dropdown-divider"></div>
                         <div class="dropdown-header">Catégorie Modérateurs</div>

@@ -9,12 +9,51 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Achat;
+use App\Entity\HistoriqueEnchere;
 
 /**
  * @Route("/user")
  */
 class UserController extends AbstractController
 {
+
+    /**
+     * @Route("/jeton", name="user_jeton", methods={"GET"})
+     */
+    public function nbJetons(): Response
+    {
+        $nbJetons = $this->getNbJetons();
+
+        return $this ->render('user/jeton.html.twig', [
+            'nbJetons' => $nbJetons,
+        ]);
+    }
+
+    public function getNbJetons(): int
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $nbJetons = $entityManager->getRepository(Achat::class)
+        ->createQueryBuilder('achat')
+        ->where('achat.user = :user')
+        ->setParameter('user', $this->getUser())
+        ->join('achat.packJetons', 'packJetons')
+        ->select('SUM(packJetons.nbjetons)')
+        ->getQuery()->getSingleScalarResult();
+        $nbJetons -= $entityManager->getRepository(HistoriqueEnchere::class)
+        ->createQueryBuilder('he')
+        ->where('he.user = :user')
+        ->setParameter('user', $this->getUser())
+        ->select('COUNT(he)')
+        ->getQuery()->getSingleScalarResult();
+
+        return $nbJetons;
+    }
+
+
+
+
+
     /**
      * @Route("/", name="user_index", methods={"GET"})
      */
@@ -22,6 +61,7 @@ class UserController extends AbstractController
     {
         return $this->render('user/index.html.twig', [
             'users' => $userRepository->findAll(),
+            'title'=>'Vos jetons'
         ]);
     }
 
@@ -39,12 +79,15 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('user_index');
+            return $this->redirectToRoute('user_index', [
+                'title'=>'Vos jetons'
+            ]);
         }
 
         return $this->render('user/new.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
+            'title'=>'Vos jetons'
         ]);
     }
 
