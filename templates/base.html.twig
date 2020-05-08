@@ -47,11 +47,17 @@
                         <a class="dropdown-item" href="{{ path('produit_index') }}">Les produits</a>
                         <a class="dropdown-item" href="{{ path('enchere_index') }}">Les enchère</a>
                         <a class="dropdown-item" href="{{ path('historique_enchere_index') }}">Historique des enchères</a>
+                        {% if is_granted('ROLE_MODO') %}
                         <div class="dropdown-divider"></div>
-                        <div class="dropdown-header">Catégorie ADMIN</div>
+                        <div class="dropdown-header">Catégorie Modérateurs</div>
                         <a class="dropdown-item" href="{{ path('produit_new') }}">Ajouter un produit</a>
                         <a class="dropdown-item" href="{{ path('enchere_new') }}">Ajouter une enchere</a>
+                        {% endif %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-header">Catégorie Administrateurs</div>
                         <a class="dropdown-item" href="{{ path('admin_utilisateurs') }}">Modifier les utilisateurs</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
