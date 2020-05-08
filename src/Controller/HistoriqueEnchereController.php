@@ -32,35 +32,41 @@ class HistoriqueEnchereController extends AbstractController
     /**
      * @Route("/new", name="historique_enchere_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request,UserController $userEnti): Response
     {
-        
-        
-        $historiqueEnchere = new HistoriqueEnchere();
-
-        
-        $form = $this->createForm(HistoriqueEnchereType::class, $historiqueEnchere);
-        $form->handleRequest($request);
-        
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $historiqueEnchere->setDateEnchere(new \Datetime());
-            $historiqueEnchere->setUser($this->getUser());
-            
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($historiqueEnchere);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('historique_enchere_index');
+        if($userEnti->getNbJetons() <= 0)
+        {
+        return $this->render('user/jetonsvoid.html.twig'); 
         }
 
-        return $this->render('historique_enchere/new.html.twig', [
-            'historique_enchere' => $historiqueEnchere,
-            'form' => $form->createView(),
-        ]);
+        if($userEnti->getNbJetons() > 0)
+        {
         
-        
+            $historiqueEnchere = new HistoriqueEnchere();
+
+            
+            $form = $this->createForm(HistoriqueEnchereType::class, $historiqueEnchere);
+            $form->handleRequest($request);
+            
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $historiqueEnchere->setDateEnchere(new \Datetime());
+                $historiqueEnchere->setUser($this->getUser());
+                
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($historiqueEnchere);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('historique_enchere_index');
+            }
+
+            return $this->render('historique_enchere/new.html.twig', [
+                'historique_enchere' => $historiqueEnchere,
+                'form' => $form->createView(),
+            ]);
+        }
+
     }
 
     /**

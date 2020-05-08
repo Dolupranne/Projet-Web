@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vos jetons{% endblock %}
+
+{% block body %}
+<h1>Vous n'avez pas/plus de jeton :'(</h1>
+<h3>Pour en racheter vous pouvez cliquer ici</h3>
+<a class='btn btn-secondary' href="{{ path('pack_jeton_index') }}">Achetez des jetons</a>
+
+{% endblock %}
