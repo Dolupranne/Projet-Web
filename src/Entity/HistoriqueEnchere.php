@@ -71,7 +71,7 @@ class HistoriqueEnchere
         return $this;
     }
 
-
+    
 
     public function getEnchere(): ?Enchere
     {

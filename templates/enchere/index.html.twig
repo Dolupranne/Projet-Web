@@ -27,7 +27,7 @@ $(document).ready( function () {
     #texteButton{color: #FFFFFF; text-align: center;}
 </style>
 
-    <h1>Enchere index</h1>
+    <h1>Liste de nos différentes enchères</h1>
 
     <table id="table" class="table">
         <thead>
@@ -64,5 +64,8 @@ $(document).ready( function () {
         </tbody>
     </table>
 
+    {% if is_granted('ROLE_MODO') %}
     <a class='btn btn-primary' href="{{ path('enchere_new') }}">Ajouter une nouvelle enchère</a>
+    {% endif %}
+
 {% endblock %}

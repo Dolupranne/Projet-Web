@@ -8,11 +8,12 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
     .boutonacceuil{min-height:100px; min-width:220px; font-size:50px;}
     #textBut { color: #333333; }
+    .annotation {text-align: center;}
 
 </style>
 
 <div class="example-wrapper">
-    <phraseAcceuille> <h1>Bienvenue dans ce magnifique site d'enchère<br> INVERSÉ !! </h1></phraseAcceuille>
+    <phraseAcceuille> <h1>Bienvenue dans ce magnifique site d'enchères<br> INVERSÉES !! </h1></phraseAcceuille>
 <br>
     Voici ce que nous vous proposons :
     
@@ -26,6 +27,14 @@
                 <button class="btn btn-info boutonacceuil" type="button"><a class="nav-link" href="{{ path('produit_index') }}"><h1 id="textBut">Produits</h1></a></button>
             </div>
         </div>
+        <phraseAcceuille> <h4>----------------------------------------------------------------------</br> 
+            Voici notre site d'enchère inverser.</br>
+            Vous trouverez ici toute les information utile pour comprendre comment nous avons construit le site.</br>
+            
+            
+            
+            </h4>
+        </phraseAcceuille>
         
         {% endblock %}
         {% endblock %}
