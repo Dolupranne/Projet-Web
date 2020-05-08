@@ -27,27 +27,42 @@
                 <button class="btn btn-info boutonacceuil" type="button"><a class="nav-link" href="{{ path('produit_index') }}"><h1 id="textBut">Produits</h1></a></button>
             </div>
         </div>
-        <phraseAcceuille> <h4>----------------------------------------------------------------------</br> 
+        <phraseAcceuille> <h5>----------------------------------------------------------------------</br> 
            Voici notre site d'enchère inversées.</br>
-Vous trouverez ici toute les information utile pour comprendre comment nous avons construit le site.</br>
-Tout d'abord, nous avons utilisé trois niveaux dans les rôles.</br>
-L'Admin, tout au dessus, qui a un controle total du site et des utilisateurs, le role Modérateur, qui permet de gérer les enchères puis le role User qui permet uniquement d'enchérir.</br>
-Nous avons différentes parties dans le site. Tout d'abord, l'acceuil. Il nous montre les options pour se connecter et s'inscrire, à partir d'un email, un pseudonyme et un mot de passe, mais aussi le menu déroulant qui nous montrent nos </br>
-possibilités de parcourir le site. D'abord, pour toutes les personnes même si elle en sont pas inscrites, nous pouvons voir les produits et les enchères. Si on est inscrit donc un User, nous pouvons voir nos jetons, nos tentatives d'achats,</br>
-l'option pour acheter des jetons ou encore l'historique d'achat de jetons.</br>
-Enfin, si la personne est modératrice, elle pourra voir les options précédentes en plus de celles pour ajouter des produits ou des enchères.</br>
+Vous trouverez ici toute les informations utile pour comprendre comment nous avons construit le site.</br>
+Tout d'abord, voici certains logs : email/mot de passe : ROLE</br>
+toto@gmail.com / totototo : ADMIN</br>
+jojojo@gmail.com / jojojo : MODO</br>
+user11@gmail.com / user11 : USER</br>
+Voici un compte suplémentaire en cas de fausse manip car un admin peut s'auto retirer ses propres droits</br>
+admin1@gmail.com / admin1 : ADMIN</br>
+
+Voici maintenant quelques explications : nous avons utilisé trois niveaux dans les rôles.</br>
+- L'Admin, a un accès total, il peut ajouter des produits et des enchères, modifier les rôles des autres et même accèder à 
+l'historique de tous les utilisateurs, il faut donc avoir une pleine confiance car il voit toutes les sommes mises en jeu.</br>
+- Le Modérateur, permet de gérer des produits et des enchères, il n'a pas de contrôle sur les membres et à accès uniquement à ses    
+historiques (histo pack jetons, histo tentative enchere, etc)</br>
+- Le role User qui permet de voir les produits, acheter des jetons, jouer aux enchères.</br>
+- Les visiteurs pas encore inscrits ne peuvent que regarder mais ne peuvent pas acheter de jeton et de ce fait ne peuvent pas miser.</br>
+Nous avons différentes parties dans le site.</br>
+Tout d'abord, l'acceuil. Il nous montre les options pour se connecter ou s'inscrire, à partir d'un email, 
+un pseudonyme et un mot de passe, mais aussi le menu déroulant qui nous montre nos possibilités pour parcourir le site, et 
+seule les personnes ayant accès au catégories les verront, ex : un visiteur ne verra pas les catégories pour acheter les jetons, 
+un user ne pourra pas accéder a un ajout de produit, un modo ne pourras pas accèder à la page qui change les rôles.</br> 
+Si on est inscrit donc un User, nous pouvons voir nos jetons, nos tentatives d'achats,l'option pour acheter des jetons ou 
+encore l'historique d'achat de jetons.</br>
 Pour terminer, les Admins ont en plus accès à la gestion des utilisateurs et des comptes.</br>
-</br>
 Enfin, au milieu de la page, vous voyez les boutons pour accéder aux différents produits et enchères.</br>
-</br>
-Dans la catégorie Produits, il nous montre la liste des produits disponibles aux enchères, et il peut aller enchérir dessus dans la catégorie Enchères.</br>
-</br>
-Les admins ont accès a l'historique de toutes les enchères, et de toutes les mises des participants, alors que les autres n'ont accès qu'a leur propre mise.</br>
-            
-            
-            
-            </h4>
-        </phraseAcceuille>
+Dans la catégorie Produits, il nous montre la liste des produits disponibles aux enchères, et il peut aller enchérir dessus dans la 
+catégorie Enchères.</br>
+Les admins ont accès a l'historique de toutes les enchères, et de toutes les mises des participants, alors que les autres n'ont accès 
+qu'a leur propres mises.</br>
+Seul les Admin/modo peuvent voir les bouton modif et supprimer les produit, un simple user ne les voit pas.</br>
+Si l'on n'a plus de jeton on ne peut plus encherir, on se dirige vers une page qui nous en informe et nous link un bouton
+pour faire le plein de jetons.</br>
+L'ensemble des historiques est disponible pour les user/modo mais ne voit que le leur, les admin ont absolument tous les historiques de
+tous les membres.</br>
+Vous retrouverez nos nom en bas de toutes les pages, nous vous souhaitons une agréable navigation :)</h5></phraseAcceuille>
         
         {% endblock %}
         {% endblock %}
