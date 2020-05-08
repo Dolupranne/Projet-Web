@@ -49,9 +49,10 @@
                         {% if is_granted('ROLE_USER') %}
                         <div class="dropdown-divider"></div>
                         <div class="dropdown-header">Catégorie Utilisateurs</div>
-                        <a class="dropdown-item" href="{{ path('historique_enchere_index') }}">Vos tentative d'enchère</a>
                         <a class="dropdown-item" href="{{ path('user_jeton') }}">Vos jetons</a>
                         <a class="dropdown-item" href="{{ path('pack_jeton_index') }}">Acheter vos jetons</a>
+                        <a class="dropdown-item" href="{{ path('achat_index') }}">Historique d'achat des pack jetons</a>
+                        <a class="dropdown-item" href="{{ path('historique_enchere_index') }}">Vos tentative d'enchère</a>
                         {% endif %}
                         {% if is_granted('ROLE_MODO') %}
                         <div class="dropdown-divider"></div>

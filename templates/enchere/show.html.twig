@@ -13,8 +13,8 @@
             <tr> 
                 <th><img width="300" height="300" src="{{enchere.produit.image}}" /></th>
                 <th> <br/><br/><br/><br/><br/><br/><br/><br/><label>Montant que vous souhaitez misez :</label><br/>
-                <input type="number" name="montant" id="montant" class="form-control" placeholder="Montant" required>
-                <a class='btn btn-primary' href='historique_enchere_new'>Encherir !!</a></th>
+                <input type="number" name="montant" id="montant" class="form-control" placeholder="{{enchere.getId}}" required>
+                <a class='btn btn-primary' href="{{ path('enchere_index') }}">Encherir !!</a></th>
                 
             </tr>
             <tr>
