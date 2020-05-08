@@ -53,7 +53,7 @@ $(document).ready( function () {
                     {% if is_granted('ROLE_MODO') %}
                     <a class="btn btn-warning SEP" class="nav-link" href="{{ path('produit_edit', {'id': produit.id}) }}"><div id = "texteButton">modifier</div></a>
                     {{ include('produit/_delete_form.html.twig') }}
-                 {% endif %}
+                    {% endif %}
                 </td>
             </tr>
         {% else %}

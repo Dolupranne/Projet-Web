@@ -21,7 +21,7 @@ $(document).ready( function () {
     <table id="table" class="table">
         <thead>
             <tr>
-                <th>Numéro</th>
+                <th>Membre</th>
                 <th>Prix</th>
                 <th>Date_enchere</th>
                 <th>Produit</th>
@@ -33,9 +33,9 @@ $(document).ready( function () {
         {% for historique_enchere in historique_encheres %}
             {% if is_granted ('ROLE_ADMIN') or  app.user.username == historique_enchere.getUser.username %}
                 <tr>
-                    <td>{{ historique_enchere.id }}</td>
+                    <td>{{ historique_enchere.getUser.pseudo }}</td>
                     <td>{{ historique_enchere.prix }}</td>
-                    <td>{{ historique_enchere.dateEnchere ? historique_enchere.dateEnchere|date('d-m-Y à H/i') : '' }}</td>
+                    <td>{{ historique_enchere.dateEnchere ? historique_enchere.dateEnchere|date('d/m/Y à H:i') : '' }}</td>
                     <td>{{ historique_enchere.enchere.produit }}</td>
                     <td><img width="200" height="200" src="{{historique_enchere.enchere.produit.image}}" /></td>
                     <td>

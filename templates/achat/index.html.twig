@@ -17,30 +17,48 @@ $(document).ready( function () {
 {% endblock %}
 
 {% block body %}
+
+
+<style>
+    .SEP{  display: block;
+            width: 90px;
+            height: 40px;
+            font-size:15px;
+            }
+    #texteButton{color: #FFFFFF; text-align: center;}
+</style>
+
     <h1>Achat index</h1>
 
     <table id="table" class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Membre</th>
                 <th>Date_achat</th>
+                <th>Nombre de jetons</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for achat in achats %}
-            <tr>
-                <td>{{ achat.id }}</td>
-                <td>{{ achat.dateAchat ? achat.dateAchat|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('achat_show', {'id': achat.id}) }}">show</a>
-                    <a href="{{ path('achat_edit', {'id': achat.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
+            {% if is_granted ('ROLE_ADMIN') or  app.user.username == achat.getUser.username %}
+                <tr>
+                    <td>{{ achat.getUser.pseudo }}</td>
+                    <td>{{ achat.dateAchat ? achat.dateAchat|date('d/m/Y à H:i') : '' }}</td>
+                    <td>{{ achat.getPackJetons.nbjetons }}</td>
+                    <td>
+                        <a class="btn btn-primary SEP" class="nav-link" href="{{ path('achat_show', {'id': achat.id}) }}"><div id = "texteButton">voir</div></a>
+                        {% if is_granted('ROLE_MODO') %}
+                        <a class="btn btn-warning SEP" class="nav-link" href="{{ path('achat_edit', {'id': achat.id}) }}"><div id = "texteButton">modifier</div></a>
+                        {{ include('achat/_delete_form.html.twig') }}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="3">no records found</td>
+                </tr>
+            {% endif %}
         {% endfor %}
         </tbody>
     </table>
